@@ -15,7 +15,7 @@ def swap_first_char_case(s: str) -> str:
     Example: swap_first_char_case("python") -> "Python"
              swap_first_char_case("PYthon") -> "pYthon"
     """
-    if (len(s) == 0):
+    if len(s) == 0:
         return s
     return s[0].swapcase() + s[1:]
 
@@ -39,11 +39,12 @@ def case_kind(s: str) -> str:
     """
     if s.isupper():
         return "upper"
-    if s.islower():
+    elif s.islower():
         return "lower"
-    if s.istitle():
+    elif s.istitle():
         return "title"
-    return "mixed"
+    else:
+        return "mixed"
 
 
 def find_all(s: str, sub: str):
@@ -55,19 +56,16 @@ def find_all(s: str, sub: str):
 
     Example: find_all("aaaa", "aa") -> [0, 1, 2]
     """
-    result = []
-    if len(sub) == 0:
-        return result
     start = 0
+    lis = []
+    if len(s) == 0 or len(sub) == 0:
+        return lis
     while start < len(s):
-        index = s.find(sub, start)
-        if index == -1:
-            break
-        else:
-            result.append(start)
+        idx = s.find(sub, start)
+        if idx != -1:
+            lis.append(idx)
         start += 1
-    return result
-            
+    return lis
 
 
 def count_overlapping(s: str, sub: str) -> int:
@@ -79,12 +77,15 @@ def count_overlapping(s: str, sub: str) -> int:
     """
     if len(sub) == 0:
         return 0
-    start = count = 0
+    start = 0
+    count = 0
     while start < len(s):
-        if s.find(sub, start) != -1:
+        idx = s.find(sub, start)
+        if idx != -1:
             count += 1
         start += 1
     return count
+
 
 def has_extension(filename: str, ext: str) -> bool:
     """
@@ -93,7 +94,7 @@ def has_extension(filename: str, ext: str) -> bool:
     Example: has_extension("Report.PDF", "pdf") -> True
              has_extension("pdf", "pdf")        -> False
     """
-    return filename.lower().endswith(f'.{ext}')
+    return filename.casefold().endswith(f".{ext}")
 
 
 def classify_token(token: str) -> str:
@@ -107,11 +108,11 @@ def classify_token(token: str) -> str:
     """
     if token.isdigit():
         return "digits"
-    if token.isalpha():
+    elif token.isalpha():
         return "letters"
-    if token.isalnum():
+    elif token.isalnum():
         return "alnum"
-    if token.isspace():
+    elif token.isspace():
         return "space"
     else:
         return "other"
