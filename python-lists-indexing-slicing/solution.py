@@ -10,9 +10,8 @@ def replace_middle(lst: list, new_items: list) -> None:
              -> lst is now [1, "x", 4]
     """
     if len(lst) < 2:
-        return lst
-    lst[1:len(lst)-1] = new_items
-    
+        return
+    lst[1:-1] = new_items
 
 
 def set_every_other(lst: list, value) -> None:
@@ -28,8 +27,8 @@ def set_every_other(lst: list, value) -> None:
     if n % 2 == 0:
         n = n // 2
     else:
-        n = (n // 2) + 1
-    lst[::2] = n * [value]
+        n =  (n // 2) + 1
+    lst[::2] = [value] * n
 
 
 def slice_copy(lst: list, start: int, stop: int) -> list:
