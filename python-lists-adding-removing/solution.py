@@ -23,6 +23,7 @@ def insert_sorted(lst: list, value) -> None:
             idx = i
             break
     lst.insert(idx, value)
+            
 
 
 def flatten_one_level(list_of_lists: list) -> list:
@@ -33,10 +34,10 @@ def flatten_one_level(list_of_lists: list) -> list:
 
     Example: flatten_one_level([[1, 2], [], [3]]) -> [1, 2, 3]
     """
-    lst = []
+    lis = []
     for l in list_of_lists:
-        lst.extend(l)
-    return lst
+        lis.extend(l)
+    return lis
 
 
 def concat_identity_report(lst: list, extra: list) -> list:
@@ -81,15 +82,16 @@ def pop_last_n(lst: list, n: int) -> list:
     Example: lst = [1, 2, 3, 4]; pop_last_n(lst, 2) -> [3, 4]
              and lst is now [1, 2]
     """
-    result = []
-    if n > len(lst):
-        result = lst[:]
+    res = []
+    if n <= 0:
+        return res
+    if n >= len(lst):
+        res = lst[:]
         lst.clear()
-        return result
-    
+        return res
     for i in range(n):
-        result.insert(0, lst.pop())
-    return result
+        res.insert(0, lst.pop())
+    return res
 
 
 def delete_every_other(lst: list) -> None:
@@ -110,7 +112,7 @@ def remove_first_or_report(lst: list, value) -> bool:
     let remove() fail.
     """
     if value in lst:
-        lst.remove(value)
+        del lst[lst.index(value)]
         return True
     else:
         return False
