@@ -3,10 +3,12 @@ def index_or_minus_one(lst: list, value) -> int:
     Return the index of the first element of `lst` that matches
     `value`, or -1 if there is none. Do not let index() raise.
     """
-    if value in lst:
-        return lst.index(value)
-    else:
+    try:
+        idx = lst.index(value)
+        return idx
+    except ValueError:
         return -1
+        
 
 
 def all_indices(lst: list, value) -> list:
@@ -16,7 +18,7 @@ def all_indices(lst: list, value) -> list:
 
     Example: all_indices([5, 3, 5, 7], 5) -> [0, 2]
     """
-    return [i for i, x in enumerate(lst) if x == value]
+    return [i for i, j in enumerate(lst) if j == value]
 
 
 def contains_all(lst: list, needles: list) -> bool:
@@ -24,12 +26,11 @@ def contains_all(lst: list, needles: list) -> bool:
     Return True if every element of `needles` is present in
     `lst`. An empty `needles` returns True.
     """
-    if len(needles) == 0:
-        return True
-    for i in needles:
-        if i not in lst:
+    for needle in needles:
+        if needle not in lst:
             return False
     return True
+
 
 def contains_same_object(lst: list, target) -> bool:
     """
@@ -40,8 +41,8 @@ def contains_same_object(lst: list, target) -> bool:
     Example: a = [1]; contains_same_object([[1], a], a) -> True
              contains_same_object([[1]], a)             -> False
     """
-    for x in lst:
-        if target is x:
+    for i in lst:
+        if i is target:
             return True
     return False
 
@@ -69,7 +70,7 @@ def last_char(word: str) -> str:
     empty. (Used as a sort key below.)
     """
     if len(word) == 0:
-        return word
+        return ""
     return word[-1]
 
 
