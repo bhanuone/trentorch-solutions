@@ -6,13 +6,14 @@ def countdown_with_skip(start: int) -> list:
     Do not use break here.
     Return the resulting list.
     """
-    l = []
+    result = []
     while start >= 1:
-        if start != 3:
-            l.append(start)
+        if start == 3:
+            start -= 1
+            continue
+        result.append(start)
         start -= 1
-    return l
-    
+    return result
 
 
 def find_first_negative(numbers: list) -> int | None:
@@ -22,12 +23,15 @@ def find_first_negative(numbers: list) -> int | None:
     If no negative number exists, use the loop's else clause to
     return None after the loop completes normally.
     """
-    idx = 0
-    while idx < len(numbers):
-        if numbers[idx] < 0:
-            return numbers[idx]
-        idx += 1
-    return None
+    index = 0
+    while index < len(numbers):
+        if numbers[index] < 0:
+            return numbers[index]
+        index += 1
+    else:
+        return None
+        
+
 
 
 def sum_with_index(numbers: list) -> dict:
@@ -40,14 +44,12 @@ def sum_with_index(numbers: list) -> dict:
     -> {0: 10, 1: 30, 2: 60}
     """
     d = {}
-    for i in range(len(numbers)):
+    for i, j in enumerate(numbers):
         if i == 0:
-            d[i] = numbers[i]
+            d[i] = j
         else:
-            d[i] = numbers[i] + d[i - 1]
-        
+            d[i] = d[i - 1] + j
     return d
-        
 
 
 def manual_iteration_trace(items: list) -> list:
@@ -61,10 +63,11 @@ def manual_iteration_trace(items: list) -> list:
     (it should exactly match the original `items` list).
     """
     itr = iter(items)
-    l = []
+    result = []
     while True:
         try:
-            l.append(next(itr))
+            elm = next(itr)
+            result.append(elm)
         except StopIteration:
             break
-    return l
+    return result
