@@ -32,4 +32,6 @@ def every_kth_from(s: str, start: int, k: int) -> str:
 
     Example: every_kth_from("abcdefgh", 1, 3) -> "beh"
     """
+    if start >= len(s) or start < -len(s):
+        return ""
     return s[start::k]
