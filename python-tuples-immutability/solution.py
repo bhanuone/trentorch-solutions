@@ -20,7 +20,7 @@ def tuple_replace(t: tuple, index: int, value) -> tuple:
         return t
     if index < 0:
         index += len(t)
-    return t[:index] + (value,) + t[index+1:]
+    return t[:index] + (value,) + t[index + 1:]
 
 
 def count_and_first_index(t: tuple, x) -> tuple:
@@ -33,15 +33,14 @@ def count_and_first_index(t: tuple, x) -> tuple:
     Example: count_and_first_index((5, 3, 5), 5) -> (2, 0)
              count_and_first_index((5, 3, 5), 9) -> (0, -1)
     """
-    pos = -1
+    first_index = -1
     count = 0
     for i, j in enumerate(t):
-        
-        if j == x:
-            if pos == -1:
-                pos = i
+        if x == j:
             count += 1
-    return(count, pos)
+            if first_index == -1:
+                first_index = i
+    return (count, first_index)
 
 
 def freeze_rows(matrix: list) -> tuple:
@@ -52,7 +51,7 @@ def freeze_rows(matrix: list) -> tuple:
 
     Example: freeze_rows([[1, 2], [3]]) -> ((1, 2), (3,))
     """
-    return tuple(tuple(row) for row in matrix)
+    return tuple(tuple(x for x in row) for row in matrix)
 
 
 def thaw_rows(frozen: tuple) -> list:
@@ -63,7 +62,7 @@ def thaw_rows(frozen: tuple) -> list:
 
     Example: thaw_rows(((1, 2), (3,))) -> [[1, 2], [3]]
     """
-    return [[i for i in f] for f in frozen]
+    return [[x for x in frozen] for t in frozen]
 
 
 def updated(seq, index: int, value):
@@ -79,18 +78,18 @@ def updated(seq, index: int, value):
              updated((1, 2, 3), 0, 9) -> (9, 2, 3)
     """
     n = len(seq)
-    lis = [i for i in seq]
     if index >= n or index < -n:
         if isinstance(seq, tuple):
-            return tuple(lis)
+            return (x for x in seq)
         else:
-            return lis
+            return [x for x in seq]
     if index < 0:
         index += n
     if isinstance(seq, tuple):
-        return tuple(lis[:index]) + (value,) + tuple(lis[index+1:])
+        return tuple(value if i == index else x for i, x in enumerate(seq))
     else:
-        return lis[:index] + [value] + lis[index+1:]
+        return [value if i == index else x for i, x in enumerate(seq)]
+
 
 def has_mutable_element(t: tuple) -> bool:
     """
@@ -103,7 +102,7 @@ def has_mutable_element(t: tuple) -> bool:
     Example: has_mutable_element((1, [2])) -> True
              has_mutable_element((1, (2,))) -> False
     """
-    for elm in t:
-        if isinstance(elm, list) or isinstance(elm, dict) or isinstance(elm, set):
+    for i in t:
+        if isinstance(i, list) or isinstance(i, set) or isinstance(i, dict):
             return True
     return False
