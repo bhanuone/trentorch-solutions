@@ -17,7 +17,7 @@ def label_parity(numbers: list) -> list:
     number. Use a conditional expression in the comprehension.
     Example: label_parity([1, 2]) -> ["odd", "even"]
     """
-    return ["even" if x % 2 == 0 else "odd" for x in numbers]
+    return ["even" if n % 2 == 0 else "odd" for n in numbers]
 
 
 def flatten(nested: list) -> list:
@@ -37,7 +37,7 @@ def multiplication_table(n: int) -> list:
     comprehension. If n <= 0, return [].
     Example: multiplication_table(2) -> [[1, 2], [2, 4]]
     """
-    return [[i*j for j in range(1, n+1)] for i in range(1, n + 1)]
+    return [[i * j for i in range(1, n + 1)] for j in range(1, n + 1)] 
 
 
 def elementwise(func, *vectors) -> list:
@@ -50,10 +50,9 @@ def elementwise(func, *vectors) -> list:
 
     Example: elementwise(lambda a, b: a + b, [1, 2], [10, 20]) -> [11, 22]
     """
+    if len(vectors) == 0:
+        return []
     return [func(*group) for group in zip(*vectors)]
-
-        
-            
 
 
 def mask_select(values: list, mask: list) -> list:
@@ -64,11 +63,7 @@ def mask_select(values: list, mask: list) -> list:
 
     Example: mask_select([5, 6, 7], [True, False, True]) -> [5, 7]
     """
-    result = []
-    for i, j in zip(values, mask):
-        if j:
-            result.append(i)
-    return result
+    return [value for value, mask in zip(values, mask) if mask]
 
 
 def broadcast_add(values: list, other) -> list:
@@ -100,5 +95,5 @@ def normalize(values: list, eps: float) -> list:
     if n == 0:
         return []
     mean = sum(values) / n
-    variance = sum((x - mean) ** 2 for x in values) / n
+    variance = sum([(x - mean) ** 2 for x in values]) / n
     return [(v - mean) / math.sqrt(variance + eps) for v in values]
