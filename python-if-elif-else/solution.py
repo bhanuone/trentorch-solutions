@@ -7,11 +7,13 @@ def classify_number(x: int | float) -> str:
       "small"        if 0 < x <= 10
       "large"        if x > 10
     """
+    result = None
     if x < 0:
-        return "negative"
+        result = "negative"
     elif x == 0:
-        return "zero"
-    elif x <= 10:
-        return "small"
+        result = "zero"
+    elif x > 0 and x <= 10:
+        result = "small"
     else:
-        return "large"
+        result = "large"
+    return result
