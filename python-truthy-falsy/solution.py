@@ -15,7 +15,6 @@ def is_truthy(value) -> bool:
         return value != 0
     else:
         return len(value) > 0
-        
 
 
 def first_truthy(values: list):
@@ -25,6 +24,6 @@ def first_truthy(values: list):
     Do not use Python's built-in `any()`, implement the scan
     explicitly using is_truthy-style checks.
     """
-    for v in values:
-        if is_truthy(v):
-            return v
+    for value in values:
+        if is_truthy(value):
+            return value
