@@ -7,7 +7,7 @@ def squares_of_evens(numbers: list) -> list:
     in order. Use a list comprehension with a filter.
     Example: squares_of_evens([1, 2, 3, 4]) -> [4, 16]
     """
-    return [n * n for n in numbers if n % 2 == 0]
+    return [n ** 2 for n in numbers if n % 2 == 0]
 
 
 def label_parity(numbers: list) -> list:
@@ -37,7 +37,7 @@ def multiplication_table(n: int) -> list:
     comprehension. If n <= 0, return [].
     Example: multiplication_table(2) -> [[1, 2], [2, 4]]
     """
-    return [[i * j for i in range(1, n + 1)] for j in range(1, n + 1)] 
+    return [[i*j for j in range(1, n + 1)] for i in range(1, n + 1)]
 
 
 def elementwise(func, *vectors) -> list:
@@ -50,8 +50,6 @@ def elementwise(func, *vectors) -> list:
 
     Example: elementwise(lambda a, b: a + b, [1, 2], [10, 20]) -> [11, 22]
     """
-    if len(vectors) == 0:
-        return []
     return [func(*group) for group in zip(*vectors)]
 
 
@@ -63,7 +61,7 @@ def mask_select(values: list, mask: list) -> list:
 
     Example: mask_select([5, 6, 7], [True, False, True]) -> [5, 7]
     """
-    return [value for value, mask in zip(values, mask) if mask]
+    return [j for i, j in enumerate(values) if mask[i]]
 
 
 def broadcast_add(values: list, other) -> list:
