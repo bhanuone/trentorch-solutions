@@ -7,10 +7,11 @@ def first_positions(words: list) -> dict:
     Example: first_positions(["a", "b", "a"]) -> {"a": 0, "b": 1}
     """
     d = {}
-    for idx, word in enumerate(words):
+    for i, word in enumerate(words):
         if word not in d:
-            d[word] = idx
+            d[word] = i
     return d
+            
 
 
 def same_key(a, b) -> bool:
@@ -33,4 +34,4 @@ def distinct_key_count(keys: list) -> int:
 
     Example: distinct_key_count([1, 1.0, True, "1"]) -> 2
     """
-    return len(dict([key, 1] for key in keys))
+    return len(dict([(key, 1) for key in keys]))
