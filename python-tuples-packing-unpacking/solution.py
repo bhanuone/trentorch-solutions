@@ -8,10 +8,10 @@ def rotate_three(a, b, c) -> tuple:
     Example: rotate_three(1, 2, 3) -> (2, 3, 1)
     """
     a, b, c = b, c, a
-    return a, b, c
+    return (a, b, c)
 
 
-def head_and_tail(seq) -> tuple:    
+def head_and_tail(seq) -> tuple:
     """
     `seq` is any sequence (list, tuple, or string). Using
     extended unpacking, return a 2-element tuple (head, tail)
@@ -23,9 +23,9 @@ def head_and_tail(seq) -> tuple:
     Example: head_and_tail((1, 2, 3)) -> (1, [2, 3])
     """
     if len(seq) == 0:
-        return None, []
+        return (None, [])
     head, *tail = seq
-    return head, tail
+    return (head, tail)
 
 
 def ends_and_middle(seq) -> tuple:
@@ -38,8 +38,8 @@ def ends_and_middle(seq) -> tuple:
     Example: ends_and_middle([1, 2, 3, 4]) -> (1, [2, 3], 4)
              ends_and_middle("ab")         -> ("a", [], "b")
     """
-    first, *middle, last = seq
-    return first, middle, last
+    a, *b, c = seq
+    return (a, b, c)
 
 
 def sum_pairs(pairs: list) -> list:
@@ -50,4 +50,7 @@ def sum_pairs(pairs: list) -> list:
 
     Example: sum_pairs([(1, 2), (3, 4)]) -> [3, 7]
     """
-    return [a + b for (a, b) in pairs]
+    result = []
+    for i, j in pairs:
+        result.append(i + j)
+    return result
