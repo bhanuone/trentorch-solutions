@@ -14,6 +14,7 @@ def replace_char_at(s: str, index: int, ch: str) -> str:
         return s
     if index < 0:
         index += len(s)
+
     return s[:index] + ch + s[index + 1:]
 
 
@@ -29,12 +30,16 @@ def insert_at(s: str, index: int, text: str) -> str:
       insert_at("abc", -1, "X")  -> "abXc"
       insert_at("abc", 99, "X")  -> "abcX"
     """
+    if index < -len(s) or index == 0:
+        return text + s
     if index >= len(s):
         return s + text
-    if index < -len(s):
-        return text + s
-    pos = index + len(s) if index < 0 else index
-    return s[:pos] + text + s[pos:]
+
+    if index < 0:
+        index += len(s)
+    return s[:index] + text + s[index:]
+    
+     
     
 
 
@@ -49,13 +54,13 @@ def join_with_separator(parts, sep: str) -> str:
     An empty `parts` returns "".
     Example: join_with_separator(["a", "b", "c"], "-") -> "a-b-c"
     """
-    result = ""
-    for i, j in enumerate(parts):
-        if i < len(parts) - 1:
-            result += (j + sep)
+    res = ""
+    for i, part in enumerate(parts):
+        if i == len(parts) - 1:
+            res += part
         else:
-            result += j
-    return result
+            res += (part + sep)
+    return res
 
 
 def repeat_text(s: str, n: int) -> str:
@@ -63,7 +68,7 @@ def repeat_text(s: str, n: int) -> str:
     Return `s` repeated `n` times using the * operator.
     If n <= 0, return "".
     """
-    return s * n
+    return n * s
 
 
 def total_chars_copied(n: int, piece_length: int) -> int:
@@ -79,4 +84,4 @@ def total_chars_copied(n: int, piece_length: int) -> int:
 
     Example: total_chars_copied(3, 2) -> 2 + 4 + 6 = 12
     """
-    return piece_length * n * (n + 1) // 2
+    return piece_length * n * (n + 1) / 2
