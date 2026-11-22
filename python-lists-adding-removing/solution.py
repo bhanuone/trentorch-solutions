@@ -4,7 +4,7 @@ def append_all(lst: list, items: list) -> None:
     so that each element becomes its own new element of `lst`.
     Use extend(). Return nothing.
     """
-    lst.extend(items)
+    return lst.extend(items)
 
 
 def insert_sorted(lst: list, value) -> None:
@@ -19,11 +19,10 @@ def insert_sorted(lst: list, value) -> None:
     """
     idx = len(lst)
     for i, j in enumerate(lst):
-        if j > value:
+        if value < j:
             idx = i
             break
     lst.insert(idx, value)
-            
 
 
 def flatten_one_level(list_of_lists: list) -> list:
@@ -34,10 +33,10 @@ def flatten_one_level(list_of_lists: list) -> list:
 
     Example: flatten_one_level([[1, 2], [], [3]]) -> [1, 2, 3]
     """
-    lis = []
-    for l in list_of_lists:
-        lis.extend(l)
-    return lis
+    res  = []
+    for lst in list_of_lists:
+        res.extend(lst)
+    return res
 
 
 def concat_identity_report(lst: list, extra: list) -> list:
@@ -50,12 +49,12 @@ def concat_identity_report(lst: list, extra: list) -> list:
     Return a list [same_after_iadd, same_after_plus].
     (The caller's original list is changed by step 1 only.)
     """
-    i = id(lst)
+    id1 = id(lst)
     lst += extra
-    same_after_iadd = i == id(lst)
-    i = id(lst)
+    same_after_iadd = id1 == id(lst)
+    id1 = id(lst)
     lst = lst + extra
-    same_after_plus = i == id(lst)
+    same_after_plus = id1 == id(lst)
     return [same_after_iadd, same_after_plus]
 
 
@@ -83,15 +82,11 @@ def pop_last_n(lst: list, n: int) -> list:
              and lst is now [1, 2]
     """
     res = []
-    if n <= 0:
-        return res
-    if n >= len(lst):
-        res = lst[:]
-        lst.clear()
-        return res
-    for i in range(n):
+    while n > 0 and len(lst) > 0:
         res.insert(0, lst.pop())
+        n -= 1
     return res
+        
 
 
 def delete_every_other(lst: list) -> None:
@@ -112,7 +107,7 @@ def remove_first_or_report(lst: list, value) -> bool:
     let remove() fail.
     """
     if value in lst:
-        del lst[lst.index(value)]
+        lst.remove(value)
         return True
     else:
         return False
