@@ -9,7 +9,7 @@ def receipt_line(item: str, qty: int, price: float) -> str:
 
     Example: receipt_line("Pen", 3, 1.5) -> "Pen            3      1.50"
     """
-    return f"{item:<12}{qty:>4}{price:>10.2f}"
+    return f"{item:<12}{qty:>4}{price:>10.{2}f}"
 
 
 def format_percent(value: float, decimals: int) -> str:
