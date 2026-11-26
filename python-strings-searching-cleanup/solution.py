@@ -16,7 +16,7 @@ def swap_first_char_case(s: str) -> str:
              swap_first_char_case("PYthon") -> "pYthon"
     """
     if len(s) == 0:
-        return s
+        return ""
     return s[0].swapcase() + s[1:]
 
 
@@ -56,16 +56,17 @@ def find_all(s: str, sub: str):
 
     Example: find_all("aaaa", "aa") -> [0, 1, 2]
     """
-    start = 0
-    lis = []
-    if len(s) == 0 or len(sub) == 0:
-        return lis
-    while start < len(s):
-        idx = s.find(sub, start)
-        if idx != -1:
-            lis.append(idx)
-        start += 1
-    return lis
+    position = 0
+    result = []
+    if len(sub) != 0:
+        while position <= len(s) - len(sub):
+            idx = s.find(sub, position)
+            if idx == -1:
+                break
+            else:
+                result.append(idx)
+                position += 1
+    return result
 
 
 def count_overlapping(s: str, sub: str) -> int:
@@ -75,15 +76,16 @@ def count_overlapping(s: str, sub: str) -> int:
     Example: count_overlapping("aaaa", "aa") -> 3
              (the built-in count() would give 2)
     """
-    if len(sub) == 0:
-        return 0
-    start = 0
+    position = 0
     count = 0
-    while start < len(s):
-        idx = s.find(sub, start)
-        if idx != -1:
-            count += 1
-        start += 1
+    if len(sub) != 0:
+        while position <= len(s) - len(sub):
+            idx = s.find(sub, position)
+            if idx == -1:
+                break
+            else:
+                count += 1
+                position += 1
     return count
 
 
@@ -94,7 +96,7 @@ def has_extension(filename: str, ext: str) -> bool:
     Example: has_extension("Report.PDF", "pdf") -> True
              has_extension("pdf", "pdf")        -> False
     """
-    return filename.casefold().endswith(f".{ext}")
+    return filename.lower().endswith(f".{ext}")
 
 
 def classify_token(token: str) -> str:
@@ -128,7 +130,7 @@ def clean_field(s: str) -> str:
     Example: clean_field("  total ; ")  -> "total"
              clean_field("  a b.. ")    -> "a b"
     """
-    return s.strip().rstrip(".,;").strip()
+    return s.strip().rstrip(".,;").strip();
 
 
 def remove_prefix_once(s: str, prefix: str) -> str:
