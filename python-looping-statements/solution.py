@@ -6,14 +6,15 @@ def countdown_with_skip(start: int) -> list:
     Do not use break here.
     Return the resulting list.
     """
-    result = []
+    lst = []
     while start >= 1:
         if start == 3:
             start -= 1
             continue
-        result.append(start)
-        start -= 1
-    return result
+        else:
+            lst.append(start)
+            start -= 1
+    return lst
 
 
 def find_first_negative(numbers: list) -> int | None:
@@ -26,12 +27,11 @@ def find_first_negative(numbers: list) -> int | None:
     index = 0
     while index < len(numbers):
         if numbers[index] < 0:
-            return numbers[index]
+            break
         index += 1
     else:
         return None
-        
-
+    return numbers[index]
 
 
 def sum_with_index(numbers: list) -> dict:
@@ -45,10 +45,7 @@ def sum_with_index(numbers: list) -> dict:
     """
     d = {}
     for i, j in enumerate(numbers):
-        if i == 0:
-            d[i] = j
-        else:
-            d[i] = d[i - 1] + j
+        d[i] = d.get(i - 1, 0) + j
     return d
 
 
@@ -66,8 +63,8 @@ def manual_iteration_trace(items: list) -> list:
     result = []
     while True:
         try:
-            elm = next(itr)
-            result.append(elm)
+            item = next(itr)
+            result.append(item)
         except StopIteration:
             break
     return result
